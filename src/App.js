@@ -1,11 +1,12 @@
-import logo from "./logo.svg";
 import "./App.css";
-import * as Tone from "tone";
+import { PlayButton } from "./PlayButton";
+// import { Music } from "./Music";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">Audio Experiments</header>
+      <PlayButton />
+      {/* <Music /> */}
     </div>
   );
 }
