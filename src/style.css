@@ -1,0 +1,40 @@
+svg {
+  fill: blue;
+}
+
+#u:hover {
+  fill: rgb(255, 47, 47);
+}
+
+g {
+  pointer-events: auto;
+}
+
+.keyboard:hover {
+  fill: rgb(255, 47, 47);
+}
+
+/* .dodo {
+  color: green;
+  width: 0;
+  height: 0;
+  border: 150px solid transparent;
+  border-top: 0;
+  border-bottom: 300px solid red;
+  mask-mode: alpha;
+  -image: linear-gradient(rgba(0, 0, 0, 1), transparent);
+} */
+
+.dodo:hover {
+  font-size: xx-large;
+  color: red;
+}
+
+.mask:hover {
+  -mode: alpha;
+  mask-image: linear-gradient(rgba(0, 0, 0, 1), transparent);
+}
+.masker:hover {
+  filter: invert(80%) sepia(50%) saturate(2476%) hue-rotate(86deg)
+    brightness(118%) contrast(119%) grayscale(1);
+}

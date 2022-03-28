@@ -1,16 +1,22 @@
 import * as Tone from "tone";
 
 export const PlayButton = () => {
-  let synth;
-
   function playIt() {
-    synth = new Tone.Synth().toDestination();
-    synth.triggerAttackRelease("C4", "8n");
-    if (Tone.Transport.state !== "started") {
-      Tone.start();
-    } else {
-      Tone.Transport.stop();
-    }
+    // create two monophonic synths
+    const synthA = new Tone.FMSynth().toDestination();
+    const synthB = new Tone.AMSynth().toDestination();
+    //play a note every quarter-note
+    const loopA = new Tone.Loop((time) => {
+      synthA.triggerAttackRelease("C2", "8n", time);
+    }, "4n").start(0);
+    //play another note every off quarter-note, by starting it "8n"
+    const loopB = new Tone.Loop((time) => {
+      synthB.triggerAttackRelease("C4", "8n", time);
+    }, "4n").start("8n");
+    // the loops start when the Transport is started
+    Tone.Transport.start();
+    // ramp up to 800 bpm over 10 seconds
+    Tone.Transport.bpm.rampTo(800, 10);
   }
   return (
     <div>
