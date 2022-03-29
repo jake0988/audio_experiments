@@ -3,20 +3,22 @@ import { handleKeyDown } from "./keyboardClick";
 import { handleKeyUp } from "./keyboardClick";
 import { useEffect } from "react";
 import { note } from "./Note";
+import { newNote } from "./Note";
 
 function Keyboard({ keypress }) {
   useEffect(() => {
     document.addEventListener("keydown", handleKeyDown);
     document.addEventListener("keyup", handleKeyUp);
-    callNote();
+
     return function cleanup() {
       document.removeEventListener("keydown", handleKeyDown);
       document.removeEventListener("keyup", handleKeyUp);
     };
   }, []);
-  function callNote(event) {
-    note(event);
-  }
+  // function callNote(e) {
+  //   if
+
+  // }
   return (
     <div>
       <svg
