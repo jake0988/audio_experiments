@@ -4,56 +4,105 @@ import { useEffect } from "react";
 
 function Keyboard({ keypress }) {
   useEffect(() => {
-    function handleKeyDown(e) {
-      // console.log(e.key);
-      switch (e.key) {
-        case "q":
-          return note("Eb3");
-        case "a":
-          return note("E3");
-        case "s":
-          return note("F3");
-        case "e":
-          return note("Gb3");
-        case "d":
-          return note("G3");
-        case "r":
-          return note("Ab3");
-        case "f":
-          return note("A3");
-        case "t":
-          return note("Bb3");
-        case "g":
-          return note("B3");
-        case "h":
-          return note("C4");
-        case "u":
-          return note("Db4");
-        case "j":
-          return note("D4");
-        case "i":
-          return note("Eb4");
-        case "k":
-          return note("E4");
-        default:
-          return "0";
-      }
-    }
     document.addEventListener("keydown", handleKeyDown);
-
-    // Don't forget to clean up 81 65 83 69 68 82 70 84 71 72 85 74 73 75
+    document.addEventListener("keyup", handleKeyUp);
+    // Don't forget to clean up 81 65 83 69 68 82 70 84 71 72 85 74 73 75a
     return function cleanup() {
       document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("keyup", handleKeyUp);
     };
   }, []);
-
-  function note(e) {
-    const synth = new Tone.Synth().toDestination();
-    const now = Tone.now();
+  function handleKeyDown(e) {
+    // console.log(e.key);
+    switch (e.key) {
+      case "q":
+        return note("Eb3");
+      case "a":
+        return note("E3");
+      case "s":
+        return note("F3");
+      case "e":
+        return note("Gb3");
+      case "d":
+        return note("G3");
+      case "r":
+        return note("Ab3");
+      case "f":
+        return note("A3");
+      case "t":
+        return note("Bb3");
+      case "g":
+        return note("B3");
+      case "h":
+        return note("C4");
+      case "u":
+        return note("Db4");
+      case "j":
+        return note("D4");
+      case "i":
+        return note("Eb4");
+      case "k":
+        return note("E4");
+      default:
+        return "0";
+    }
+  }
+  function handleKeyUp(e) {
+    // console.log(e.key);
+    switch (e.key) {
+      case "q":
+        return note("Eb3", "y");
+      case "a":
+        return note("E3", "y");
+      case "s":
+        return note("F3", "y");
+      case "e":
+        return note("Gb3", "y");
+      case "d":
+        return note("G3", "y");
+      case "r":
+        return note("Ab3", "y");
+      case "f":
+        return note("A3", "y");
+      case "t":
+        return note("Bb3", "y");
+      case "g":
+        return note("B3", "y");
+      case "h":
+        return note("C4", "y");
+      case "u":
+        return note("Db4", "y");
+      case "j":
+        return note("D4", "y");
+      case "i":
+        return note("Eb4", "y");
+      case "k":
+        return note("E4", "y");
+      default:
+        return "0";
+    }
+  }
+  const synth = new Tone.Synth().toDestination();
+  function note(pitch, up) {
+    // const now = Tone.now();
     // trigger the attack immediately
-    synth.triggerAttack(e, now);
+    // synth.triggerAttack(synth, pitch);
+
+    // key(synth, pitch);
+    synth.triggerAttack(pitch);
+    if (up) {
+      synth.triggerRelease("0");
+    }
     // wait one second before triggering the release
-    synth.triggerRelease(now + 1);
+    // synth.triggerRelease(pitch);
+  }
+
+  function key(synth, pitch) {
+    synth.triggerAttack(pitch);
+  }
+
+  function noteUp(synth, pitch) {
+    synth.triggerRelease("0");
   }
 
   return (
