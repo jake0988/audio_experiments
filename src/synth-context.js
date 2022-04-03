@@ -3,7 +3,7 @@ import * as Tone from "tone"
 
 export const synths = {
     synth: new Tone.PolySynth(Tone.Synth).toDestination(),
-    am: new Tone.PolySynth(Tone.AMSynth).toDestination(),
+    am: new Tone.PolySynth(Tone.FMSynth).toDestination(),
     fm: new Tone.PolySynth(Tone.FMSynth).toDestination(),
   
 }

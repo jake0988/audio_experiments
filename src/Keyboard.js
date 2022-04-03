@@ -15,10 +15,12 @@ import { useRef } from "react";
 
 function Keyboard() {
   useEffect(() => {
-    toggleSynth()
-    document.addEventListener("keydown", handleKeyDown);
-    document.addEventListener("keyup", handleKeyUp);
-
+    setCount(cycle(count))
+    // iterate(count)
+    toggleSynth(synthArray[count])
+    document.addEventListener("keydown", handleKeyDown, true);
+    document.addEventListener("keyup", handleKeyUp, true);
+    
     return function cleanup() {
       document.removeEventListener("keydown", handleKeyDown);
       document.removeEventListener("keyup", handleKeyUp);
@@ -27,25 +29,34 @@ function Keyboard() {
 
   
   const [synth, toggleSynth] = useState("synth")
-  const [synthType, toggleSynthType] = useState(synths.synth)
+  // const [synthType, toggleSynthType] = useState(synth)
   const [count, setCount] = useState(0);
-  const newSynth = useRef(synth);
+  const newSynth = useRef(synthArray[count]);
 
-  function cycle() {
-    const num = (count + 1) % 3;
-    return num;
-  }
-  function iterate(count) {
-    setCount(cycle);
-    toggleSynth(synthArray[count])
-    toggleSynthType(synths.am)
-    newSynth.current = synth
-    polyNote(null, null, newSynth.current)
+  function cycle(n) {
     
-    const value = synthArray
-    const c = count
-    const r = synthType
-     
+    console.log("in cycle", synth, n, count)
+    return (n + 1) % 3;
+      
+  }
+
+  function iterate(count) {
+    setCount(cycle(count));
+    changeSynthType()
+    // toggleSynth(synthArray[count])
+    // toggleSynthType(synth)
+    newSynth.current = synth
+    console.log("in ITERATE", synth, count)
+  }
+  function changeSynth() {
+    console.log("changeSynth", synth) 
+    newSynth.current = synth
+   
+  }
+  function changeSynthType() {
+    console.log("changeSynthType", synth) 
+    changeSynth()
+    polyNote(null, null, newSynth.current)
   }
 
   return (

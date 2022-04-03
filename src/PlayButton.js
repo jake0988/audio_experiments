@@ -1,11 +1,5 @@
-import * as Tone from "tone";
-import { useState } from "react";
-import { useEffect } from "react";
-import { synthArray } from "./synth-context";
-import { synths } from "./synth-context";
-
+import React from "react";
 export const PlayButton = (props) => {
-  
 
 
   return (

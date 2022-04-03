@@ -12,6 +12,7 @@ export function polyNote(e, pitch, synthType, up) {
   // debugger
   if (e) {
   e.preventDefault();
+  e.stopPropagation();
   }
   if (synthType === "fm"){
   synth = fmSynth
