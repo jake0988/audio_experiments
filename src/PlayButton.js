@@ -1,28 +1,20 @@
 import * as Tone from "tone";
+import { useState } from "react";
+import { useEffect } from "react";
+import { synthArray } from "./synth-context";
+import { synths } from "./synth-context";
 
-export const PlayButton = () => {
-  function playIt() {
-    // create two monophonic synths
-    const synthA = new Tone.FMSynth().toDestination();
-    const synthB = new Tone.AMSynth().toDestination();
-    //play a note every quarter-note
-    const loopA = new Tone.Loop((time) => {
-      synthA.triggerAttackRelease("C2", "8n", time);
-    }, "4n").start(0);
-    //play another note every off quarter-note, by starting it "8n"
-    const loopB = new Tone.Loop((time) => {
-      synthB.triggerAttackRelease("C4", "8n", time);
-    }, "4n").start("8n");
-    // the loops start when the Transport is started
-    Tone.Transport.start();
-    // ramp up to 800 bpm over 10 seconds
-    Tone.Transport.bpm.rampTo(800, 10);
-  }
+export const PlayButton = (props) => {
+  
+
+
   return (
     <div>
-      <button className="play-button" onClick={() => playIt()}>
-        Play/Pause
+      <button className="synth-toggle" onClick={() => props.iterate(props.count)} >
+        Synth Type: {props.synth}
       </button>
+        
+        
     </div>
   );
 };

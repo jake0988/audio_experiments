@@ -1,37 +1,38 @@
 import React from "react";
-import { note } from "./Note";
+import { polyNoteNoE } from "./PolyNote";
+import { polyNoteUp } from "./PolyNote";
 
 export function handleKeyDown(e) {
   // console.log(e.key);
   switch (e.key) {
     case "q":
-      return note("Eb3");
+      return polyNoteNoE("Eb3");
     case "a":
-      return note("E3");
+      return polyNoteNoE("E3");
     case "s":
-      return note("F3");
+      return polyNoteNoE("F3");
     case "e":
-      return note("Gb3");
+      return polyNoteNoE("Gb3");
     case "d":
-      return note("G3");
+      return polyNoteNoE("G3");
     case "r":
-      return note("Ab3");
+      return polyNoteNoE("Ab3");
     case "f":
-      return note("A3");
+      return polyNoteNoE("A3");
     case "t":
-      return note("Bb3");
+      return polyNoteNoE("Bb3");
     case "g":
-      return note("B3");
+      return polyNoteNoE("B3");
     case "h":
-      return note("C4");
+      return polyNoteNoE("C4");
     case "u":
-      return note("Db4");
+      return polyNoteNoE("Db4");
     case "j":
-      return note("D4");
+      return polyNoteNoE("D4");
     case "i":
-      return note("Eb4");
+      return polyNoteNoE("Eb4");
     case "k":
-      return note("E4");
+      return polyNoteNoE("E4");
     default:
       return "0";
   }
@@ -41,33 +42,33 @@ export function handleKeyUp(e) {
   // console.log(e.key);
   switch (e.key) {
     case "q":
-      return note("Eb3", "y");
+      return polyNoteUp("Eb3", "y");
     case "a":
-      return note("E3", "y");
+      return polyNoteUp("E3", "y");
     case "s":
-      return note("F3", "y");
+      return polyNoteUp("F3", "y");
     case "e":
-      return note("Gb3", "y");
+      return polyNoteUp("Gb3", "y");
     case "d":
-      return note("G3", "y");
+      return polyNoteUp("G3", "y");
     case "r":
-      return note("Ab3", "y");
+      return polyNoteUp("Ab3", "y");
     case "f":
-      return note("A3", "y");
+      return polyNoteUp("A3", "y");
     case "t":
-      return note("Bb3", "y");
+      return polyNoteUp("Bb3", "y");
     case "g":
-      return note("B3", "y");
+      return polyNoteUp("B3", "y");
     case "h":
-      return note("C4", "y");
+      return polyNoteUp("C4", "y");
     case "u":
-      return note("Db4", "y");
+      return polyNoteUp("Db4", "y");
     case "j":
-      return note("D4", "y");
+      return polyNoteUp("D4", "y");
     case "i":
-      return note("Eb4", "y");
+      return polyNoteUp("Eb4", "y");
     case "k":
-      return note("E4", "y");
+      return polyNoteUp("E4", "y");
     default:
       return "0";
   }
