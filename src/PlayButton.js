@@ -1,6 +1,6 @@
 import React from "react";
 export const PlayButton = (props) => {
-
+console.log("In PlayButton", props.synth, props.count)
 
   return (
     <div>
