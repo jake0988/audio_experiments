@@ -18,13 +18,13 @@ function Keyboard() {
     // setCount(cycle(count))
     // iterate(count)
     // toggleSynth(synthArray[count])
-    // document.addEventListener("keydown", handleKeyDown, true);
-    // document.addEventListener("keyup", handleKeyUp, true);
+    document.addEventListener("keydown", handleKeyDown, true);
+    document.addEventListener("keyup", handleKeyUp, true);
     
-    // return function cleanup() {
-    //   document.removeEventListener("keydown", handleKeyDown);
-    //   document.removeEventListener("keyup", handleKeyUp);
-    // };
+    return function cleanup() {
+      document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("keyup", handleKeyUp);
+    };
   }, []);
 
   
