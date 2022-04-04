@@ -1,12 +1,16 @@
 import React from "react";
 import { polyNoteNoE } from "./PolyNote";
 import { polyNoteUp } from "./PolyNote";
+import { polyNote } from "./PolyNote";
+
 
 export function handleKeyDown(e) {
-  // console.log(e.key);
+  e.preventDefault() 
+  e.stopPropagation();
+  console.log("In keyboard down",e.key);
   switch (e.key) {
     case "q":
-      return polyNoteNoE("Eb3");
+      return polyNote(e, "Eb3");
     case "a":
       return polyNoteNoE("E3");
     case "s":
@@ -42,7 +46,7 @@ export function handleKeyUp(e) {
   // console.log(e.key);
   switch (e.key) {
     case "q":
-      return polyNoteUp("Eb3", "y");
+      return polyNote(e.key, "y");
     case "a":
       return polyNoteUp("E3", "y");
     case "s":

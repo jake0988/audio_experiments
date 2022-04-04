@@ -1,105 +1,31 @@
 import React from "react";
-import { handleKeyDown } from "./keyboardClick";
-import { handleKeyUp } from "./keyboardClick";
-import { useEffect } from "react";
-import { PlayButton } from "./PlayButton";
-import { synths } from "./synth-context";
-import { useState } from "react";
-import { synthArray } from "./synth-context";
-import * as Tone from "tone";
 import { polyNote } from "./PolyNote";
 import { polyNoteUp } from "./PolyNote";
-import { PolySynth } from "tone";
-import Synthesizer from "./PolyNote";
-import { useRef } from "react";
-import { synthChange } from "./PolyNote";
-import KeyboardSVG from "./KeyboardSVG";
 
-function Keyboard() {
-  useEffect(() => {
-    // setCount(cycle(count))
-    // iterate(count)
-    // toggleSynth(synthArray[count])
-    document.addEventListener("keydown", toggleHandleKeyDown);
-    document.addEventListener("keyup", handleKeyUp);
-
-
-
-    
-    return function cleanup() {
-      document.removeEventListener("keydown", handleKeyDown);
-      document.removeEventListener("keyup", handleKeyUp);
-    };
-  }, []);
-
-  
-  const [synth, toggleSynth] = useState("synth")
-  // const [synthType, toggleSynthType] = useState(synth)
-  const [count, setCount] = useState(0);
-  const newSynth = useRef(synthArray[count]);
+function KeyboardSVG() {
   let mouseDown = false
-
-  function toggleHandleKeyDown(e) {
-    if (e.repeat) {
-      // debugger
-      return
-    }
-    handleKeyDown(e)
+  function mouseClick(e) {
+    mouseDown = true
+    polyNote(e, e.target.id)
   }
 
-  function cycle(n) {
-    
-    console.log("in cycle", synth, n, count)
-    return (n + 1) % 3;
-      
+  function mouseOverClick(e) {
+    if (mouseDown === true) {
+    polyNote(e, e.target.id)
+  }
   }
 
-  function iterate(count) {
-    setCount(cycle(count));
-    changeSynthType()
-    toggleSynth(synthArray[count])
-    // toggleSynthType(synth)
-    newSynth.current = synth
-    console.log("in ITERATE", synth, count)
-  }
-  function changeSynth() {
-    console.log("changeSynth", synth) 
-    newSynth.current = synth
-   
-  }
-  function changeSynthType() {
-    console.log("changeSynthType", synth) 
-    changeSynth()
-    synthChange(newSynth.current)
+  function mouseUp(e, y) {
+    mouseDown = false
+    polyNoteUp(e.target.id, y)
   }
 
-  // function mouseClick(e) {
-  //   mouseDown = true
-  //   polyNote(e, e.target.id)
-  // }
-
-  // function mouseOverClick(e) {
-  //   if (mouseDown === true) {
-  //   polyNote(e, e.target.id)
-  // }
-  // }
-
-  // function mouseUp(e, y) {
-  //   mouseDown = false
-  //   polyNoteUp(e.target.id, y)
-  // }
-
-  // function mouseOut(e, y) {
-  //   polyNoteUp(e.target.id, y)
-  // }
-
-
-
-  return (
-    <div >
-      <PlayButton synth={newSynth.current} iterate={iterate} count={count}/>
-      <KeyboardSVG />
-      {/* <svg
+  function mouseOut(e, y) {
+    polyNoteUp(e.target.id, y)
+  }
+  return(
+    <div>
+      <svg
         xmlns="http://www.w3.org/2000/svg"
         xmlnsXlink="http://www.w3.org/1999/xlink"
         viewBox="0 0 480 312"
@@ -280,9 +206,9 @@ function Keyboard() {
             xlinkHref="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAEcCAYAAACBGzd+AAAACXBIWXMAAAsSAAALEgHS3X78AAADDElEQVR4Xu3cP2sTcQDG8ef+JGlq09bGYrESrSiCgoMu2g4ujoq4dHNxdfUdCI71DQjiVlBQBDffgu/AF+Da0Ca5JPc7hyDYob3aJP0aeD7TcTxc8uXu1ouKotA0bG+/eLKxceNllvV+/X0+hNCv1+cf3bm9crk+V/uRD4eDo65xlCRNK5L0+s3bV2nZ+LTu3tv8tPngYbXdbh86PxgENZvL2tq6piSJ7kvhiCscZ/S3373fXZ9aQLez/3Nvb+/W/v7hgKyfa6kRlAwWpTySwimegGpFCoWiYhjHZduJK6Q4jqQoKlueyNkHTJgDaA6gOYDmAJoDaA6gOYDmAJoDaA6gOYDmAJoDaA6gOYDmAJoDaA6gOYDmAJoDaA6gOYDmAJoDaA6gOYDmAJoDaA6gOYDmAJoDaA6gOYDmAJoDaA6gOYDmAJoDaA6gOYDmAJoDaA6gOYDmAJoDaA6gOYDmAJoDaA6gOYDmAJoDaA6gOYDmAJoDaA6gOYDmAJoDaA6gOYDmAJoDaA6gOYDmAJoDaA6gOYDmAJoDaA6gOYDmAJoDaA6gOYDmAJoDaA6gOYA2tYCiKAZRVLYa39QCKpXq+TzPy2ZjSyVpZ+dD0WxeVJb1yvYntrFxU91up2w2tlSSlpebWlu7pE7noGx/Yv1+pjzPFU35OUolKcu66nQO1Ot1y/b/ZNp/XpriO3BWZj4g/XMQQlAIxXHbiZj0b8z+HWi1rlz/8vljaLWuxtlBu2w/tjwvtHCuKhWTuRNpJY1q6+uL8YXVJWk1KdtPRh6kQZAm0DB6B7KhpIHUGx6//g/N/DvgAJoDaA6gOYDmAJoDaA6gOYDmAJoDaA6gOYDmAJoDaA6gOYDmAJoDaA6gOYDmAJoDaA6gOYDmAJoDaA6gOYDmAJoDaA6gOYDmAJoDaA6gOYDmAJoDaA6gOYDmAJoDaA6gOYA28wGjT5MkyegwOaNvq4wrTqQoSJLSQnGIa/OS5qTK9L9KNhk1KcpVRGmIGo3GyrOnj583FuqNPM9n4uswSZKkkvT12/fd32ulitWTKwYSAAAAAElFTkSuQmCC"
           ></image>
         </g>
-      </svg> */}
+      </svg>
     </div>
-  );
+  )
 }
 
-export default Keyboard;
+export default KeyboardSVG;

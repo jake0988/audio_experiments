@@ -8,31 +8,31 @@ let amSynth = new Tone.PolySynth(Tone.AMSynth).toDestination()
 let synth = new Tone.PolySynth(Tone.Synth).toDestination()
 let toneSynth = new Tone.PolySynth(Tone.Synth).toDestination()
 
-export function polyNote(e, pitch, synthType, up) {
+export function synthChange(synthType) {
+  if (synthType === "fm"){
+    synth = fmSynth
+    // debugger
+    }
+    else if (synthType === "am") {
+      synth = amSynth
+    }
+    else if (synthType === "synth") {
+      synth = toneSynth
+    }
+}
+
+export function polyNote(e, pitch) {
   // debugger
   if (e) {
   e.preventDefault();
   e.stopPropagation();
-  }
-  if (synthType === "fm"){
-  synth = fmSynth
-  // debugger
-  }
-  else if (synthType === "am") {
-    synth = amSynth
-  }
-  else if (synthType === "synth") {
-    synth = toneSynth
   }
   
   // trigger the attack immediately
   // synth.triggerAttack(synth, pitch);
   // key(synth, pitch);
   synth.triggerAttack(pitch, now);
-  if (up) {
-    // debugger
-    synth.triggerRelease([pitch], now);
-  }
+  
 }
 
 export function polyNoteNoE(pitch, synthType, up) {
