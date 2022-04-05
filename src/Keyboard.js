@@ -16,10 +16,16 @@ import { synthChange } from "./PolyNote";
 import KeyboardSVG from "./KeyboardSVG";
 
 function Keyboard() {
+
+  const [synth, toggleSynth] = useState("synth")
+  // const [synthType, toggleSynthType] = useState(synth)
+  const [count, setCount] = useState(0);
+  const newSynth = useRef(synthArray[count]);
   useEffect(() => {
     // setCount(cycle(count))
     // iterate(count)
     // toggleSynth(synthArray[count])
+    console.log("In useEffect", synth, count)
     document.addEventListener("keydown", toggleHandleKeyDown);
     document.addEventListener("keyup", handleKeyUp);
 
@@ -30,15 +36,10 @@ function Keyboard() {
       document.removeEventListener("keydown", handleKeyDown);
       document.removeEventListener("keyup", handleKeyUp);
     };
-  }, []);
+  }, [count, synth]);
 
   
-  const [synth, toggleSynth] = useState("synth")
-  // const [synthType, toggleSynthType] = useState(synth)
-  const [count, setCount] = useState(0);
-  const newSynth = useRef(synthArray[count]);
-  let mouseDown = false
-
+  const temp = synthArray[count] 
   function toggleHandleKeyDown(e) {
     if (e.repeat) {
       // debugger
@@ -56,22 +57,23 @@ function Keyboard() {
 
   function iterate(count) {
     setCount(cycle(count));
-    changeSynthType()
-    toggleSynth(synthArray[count])
+    
+    toggleSynth(temp)
+
     // toggleSynthType(synth)
     newSynth.current = synth
-    console.log("in ITERATE", synth, count)
+    console.log("in ITERATE", synth, count, temp)
   }
-  function changeSynth() {
-    console.log("changeSynth", synth) 
-    newSynth.current = synth
+  // function changeSynth() {
+  //   console.log("changeSynth", synth) 
+  //   newSynth.current = synth
    
-  }
-  function changeSynthType() {
-    console.log("changeSynthType", synth) 
-    changeSynth()
-    synthChange(newSynth.current)
-  }
+  // }
+  // function changeSynthType() {
+  //   console.log("changeSynthType", synth) 
+  //   changeSynth()
+  //   synthChange(newSynth.current)
+  // }
 
   // function mouseClick(e) {
   //   mouseDown = true
@@ -97,7 +99,7 @@ function Keyboard() {
 
   return (
     <div >
-      <PlayButton synth={newSynth.current} iterate={iterate} count={count}/>
+      <PlayButton synth={temp} iterate={iterate} count={count}/>
       <KeyboardSVG />
       {/* <svg
         xmlns="http://www.w3.org/2000/svg"
