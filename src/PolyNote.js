@@ -31,7 +31,7 @@ export function polyNote(e, pitch) {
   // trigger the attack immediately
   // synth.triggerAttack(synth, pitch);
   // key(synth, pitch);
-  synth.triggerAttack(pitch, now);
+  synth.triggerAttack(pitch);
   
 }
 
@@ -46,5 +46,5 @@ export function polyNoteNoE(pitch, synthType, up) {
 }
 
 export function polyNoteUp(pitch, synthType) {
-  synth.triggerRelease([pitch], now);
+  synth.triggerRelease([pitch], "+.0000001");
 }
