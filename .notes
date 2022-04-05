@@ -1,0 +1,30 @@
+  case "q":
+      return polyNoteUp(e, e.key);
+    case "a":
+      return polyNoteUp(e, "E3");
+    case "s":
+      return polyNoteUp(e, "F3");
+    case "e":
+      return polyNoteUp(e, "Gb3");
+    case "d":
+      return polyNoteUp(e, "G3");
+    case "r":
+      return polyNoteUp(e, "Ab3");
+    case "f":
+      return polyNoteUp(e, "A3");
+    case "t":
+      return polyNoteUp(e, "Bb3");
+    case "g":
+      return polyNoteUp(e, "B3");
+    case "h":
+      return polyNoteUp(e, "C4");
+    case "u":
+      return polyNoteUp(e, "Db4");
+    case "j":
+      return polyNoteUp(e, "D4");
+    case "i":
+      return polyNoteUp(e, "Eb4");
+    case "k":
+      return polyNoteUp(e, "E4");
+    default:
+      return "0";

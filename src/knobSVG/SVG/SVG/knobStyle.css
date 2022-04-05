@@ -1,0 +1,19 @@
+      .d {
+        letter-spacing: -.02em;
+      }
+
+      .e {
+        letter-spacing: 0em;
+      }
+
+      .f {
+        fill: none;
+        stroke: #231f20;
+        stroke-miterlimit: 10;
+      }
+
+      .g {
+        fill: #231f20;
+        font-family: MyriadPro-Regular, Myriad Pro;
+        font-size: 12px;
+      }

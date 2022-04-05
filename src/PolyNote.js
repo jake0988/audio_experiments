@@ -9,42 +9,33 @@ let synth = new Tone.PolySynth(Tone.Synth).toDestination()
 let toneSynth = new Tone.PolySynth(Tone.Synth).toDestination()
 
 export function synthChange(synthType) {
-  if (synthType === "fm"){
-    synth = fmSynth
-    // debugger
-    }
-    else if (synthType === "am") {
-      synth = amSynth
-    }
-    else if (synthType === "synth") {
-      synth = toneSynth
-    }
+  switch(synthType) {
+    case("sine") :
+      return synth = toneSynth;
+    case("fm") :
+      return synth = fmSynth;
+    case("am") :
+      return synth = amSynth;
+    default :
+      return synth - toneSynth;
+  }
 }
 
 export function polyNote(e, pitch) {
-  // debugger
-  if (e) {
   e.preventDefault();
   e.stopPropagation();
-  }
-  
-  // trigger the attack immediately
-  // synth.triggerAttack(synth, pitch);
-  // key(synth, pitch);
+
   synth.triggerAttack(pitch);
   
 }
 
-export function polyNoteNoE(pitch, synthType, up) {
-  // trigger the attack immediately
-  // synth.triggerAttack(synth, pitch);
-  // key(synth, pitch);
-  synth.triggerAttack(pitch, now);
-  if (up) {
-    synth.triggerRelease([pitch], now);
-  }
-}
+// export function polyNoteNoE(pitch, synthType, up) {
+//   synth.triggerAttack(pitch, now);
+//   if (up) {
+//     synth.triggerRelease([pitch], now);
+//   }
+// }
 
-export function polyNoteUp(pitch, synthType) {
+export function polyNoteUp(pitch) {
   synth.triggerRelease([pitch], "+.0000001");
 }
