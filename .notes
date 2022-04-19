@@ -28,3 +28,90 @@
       return polyNoteUp(e, "E4");
     default:
       return "0";
+
+
+      import React from "react";
+import { polyNoteNoE } from "./PolyNote";
+import { polyNoteUp } from "./PolyNote";
+import { polyNote } from "./PolyNote";
+import { justIntNumerator } from "./scaleFunctions";
+import { justIntDenominator } from "./scaleFunctions";
+import { tuning } from "./tuning";
+import { createScale } from "./tuning";
+
+export function handleKeyDown(e, note) {
+  e.preventDefault() 
+  e.stopPropagation();
+ console.log("Downkey", e.key)
+//  const t = tuning(155.56 * justIntNumerator[0]), justIntDenominator[0])
+
+ 
+  switch (e.key) {
+    case "q":
+      return polyNote(e, 155.56);
+    case "a":
+      return polyNote(e,(155.56 * justIntNumerator[0]) / justIntDenominator[0])
+    case "s":
+      return polyNote(e, (155.56 * justIntNumerator[1]) / justIntDenominator[1]);
+    case "e":
+      return polyNote(e, (155.56 * justIntNumerator[2]) / justIntDenominator[2]);
+    case "d":
+      return polyNote(e, (155.56 * justIntNumerator[3]) / justIntDenominator[3]);
+    case "r":
+      return polyNote(e, (155.56 * justIntNumerator[4]) / justIntDenominator[4]);
+    case "f":
+      return polyNote(e, (155.56 * justIntNumerator[5]) / justIntDenominator[5]);
+    case "t":
+      return polyNote(e, (155.56 * justIntNumerator[6]) / justIntDenominator[6]);
+    case "g":
+      return polyNote(e, (155.56 * justIntNumerator[7]) / justIntDenominator[7]);
+    case "h":
+      return polyNote(e, (155.56 * justIntNumerator[8]) / justIntDenominator[8]);
+    case "u":
+      return polyNote(e, (155.56 * justIntNumerator[9]) / justIntDenominator[9]);
+    case "j":
+      return polyNote(e, (155.56 * justIntNumerator[10]) / justIntDenominator[10]);
+    case "i":
+      return polyNote(e, (155.56 * justIntNumerator[11]) / justIntDenominator[11]);
+    case "k":
+      return polyNote(e, (155.56 * justIntNumerator[12]) / justIntDenominator[12]);
+    default:
+      return "0";
+  }
+}
+
+export function handleKeyUp(e) {
+  console.log(e.key);
+  switch (e.key) {
+    case "q":
+      return polyNoteUp(155.56);
+    case "a":
+      return polyNoteUp((155.56 * justIntNumerator[0]) / justIntDenominator[0])
+    case "s":
+      return polyNoteUp((155.56 * justIntNumerator[1]) / justIntDenominator[1]);
+    case "e":
+      return polyNoteUp((155.56 * justIntNumerator[2]) / justIntDenominator[2]);
+    case "d":
+      return polyNoteUp((155.56 * justIntNumerator[3]) / justIntDenominator[3]);
+    case "r":
+      return polyNoteUp((155.56 * justIntNumerator[4]) / justIntDenominator[4]);
+    case "f":
+      return polyNoteUp((155.56 * justIntNumerator[5]) / justIntDenominator[5]);
+    case "t":
+      return polyNoteUp((155.56 * justIntNumerator[6]) / justIntDenominator[6]);
+    case "g":
+      return polyNoteUp((155.56 * justIntNumerator[7]) / justIntDenominator[7]);
+    case "h":
+      return polyNoteUp((155.56 * justIntNumerator[8]) / justIntDenominator[8]);
+    case "u":
+      return polyNoteUp((155.56 * justIntNumerator[9]) / justIntDenominator[9]);
+    case "j":
+      return polyNoteUp((155.56 * justIntNumerator[10]) / justIntDenominator[10]);
+    case "i":
+      return polyNoteUp((155.56 * justIntNumerator[11]) / justIntDenominator[11]);
+    case "k":
+      return polyNoteUp((155.56 * justIntNumerator[12]) / justIntDenominator[12]);
+    default:
+      return "0";
+  }
+}

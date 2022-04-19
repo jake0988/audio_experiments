@@ -1,29 +1,48 @@
 import React from "react";
-import { polyNote } from "./PolyNote";
-import { polyNoteUp } from "./PolyNote";
+import { polyNote } from "./PolyNoteMouse";
+import { polyNoteUp } from "./PolyNoteMouse";
+import { noteToNumberConvertor } from "../keyboard_and_mouse/scaleObject";
+import { upOrDown } from "../keyboard_and_mouse/scaleObject";
+import { singleNote } from "../keyboard_and_mouse/scaleObject";
 
-function KeyboardSVG() {
-  let mouseDown = false
+function KeyboardSVG({tuningCh, octave}) {
+  let mouseDown = false;
+  function createTemperedNote(e, noteId) {
+   
+      const noteNumber = noteToNumberConvertor(noteId);
+      const note = singleNote(tuningCh, noteNumber);
+      upOrDown(e, note);
+    
+  }
+  function upOrDown(e, note) {
+    if (octave){
+    note = note * (octave + 1)}
+    if (e === "down") {
+      return polyNote(e, note);
+    } else if (e === "up") {
+      return polyNoteUp(e, note);
+    }
+  }
   function mouseClick(e) {
-    mouseDown = true
-    polyNote(e, e.target.id)
+    mouseDown = true;
+    createTemperedNote("down", e.target.id);
   }
 
   function mouseOverClick(e) {
     if (mouseDown === true) {
-    polyNote(e, e.target.id)
-  }
-  }
-
-  function mouseUp(e, y) {
-    mouseDown = false
-    polyNoteUp(e.target.id, y)
+      createTemperedNote("down", e.target.id);
+    }
   }
 
-  function mouseOut(e, y) {
-    polyNoteUp(e.target.id, y)
+  function mouseUp(e) {
+    mouseDown = false;
+    createTemperedNote("up", e.target.id);
   }
-  return(
+
+  function mouseOut(e) {
+    createTemperedNote("up", e.target.id);
+  }
+  return (
     <div>
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -40,11 +59,10 @@ function KeyboardSVG() {
           <image
             id="Eb4"
             onMouseDown={(e) => mouseClick(e)}
-            onMouseUp={(e) => mouseUp(e, "y")}
-            onMouseOut={(e) => mouseOut(e, "y")}
+            onMouseUp={(e) => mouseUp(e)}
+            onMouseOut={(e) => mouseOut(e)}
             onMouseOver={(e) => mouseOverClick(e)}
             className="masker"
-            
             transform="translate(399 14)"
             xlinkHref="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAC1CAYAAAAzz41DAAAACXBIWXMAAAsSAAALEgHS3X78AAABHElEQVR4Xu3OsUoDUQBE0cdqtSKuYEJAtJH8/x+JYBmtDYLELu1yqqS4B6ab4o79/u00xriqbTa707Td7sa1mee7MZ3+ftd+FzGtHS6lMFWYKkwVpgpThanCVGGqMFWYKkwVpgpThanCVGGqMFWYKkwVpgpThanCVGGqMFWYKkwVpgpThanCVGGqMFWYKkwVpgpThanCVGGqMFWYKkwVpgpThanCVGGqMFWYKkwVpgpThanCVGGqMFWYKkwVpgpThanCVGGqMFWYKkwVpgpThanCVGGqMFWYKkwVpgpThanCVGGqMFWYKkwVpgpThanCVGHq9vXlebx/fI7l4X7tO6bpZhy+DuNw+F67ns3zPJblae12djz+jOVxO/4B1SE3bFsRrHkAAAAASUVORK5CYII="
           ></image>
@@ -52,9 +70,8 @@ function KeyboardSVG() {
         <g>
           <image
             onMouseDown={(e) => mouseClick(e)}
-            onMouseUp={(e) => mouseUp(e, "y")}
-            onMouseOut={(e) => mouseOut(e, "y")}
-            onMouseOver={(e) => mouseOverClick(e)}
+            onMouseUp={(e) => mouseUp(e)}
+            onMouseOut={(e) => mouseOut(e)}
             onMouseOver={(e) => mouseOverClick(e)}
             className="masker"
             id="Db4"
@@ -65,8 +82,8 @@ function KeyboardSVG() {
         <g>
           <image
             onMouseDown={(e) => mouseClick(e)}
-            onMouseUp={(e) => mouseUp(e, "y")}
-            onMouseOut={(e) => mouseOut(e, "y")}
+            onMouseUp={(e) => mouseUp(e)}
+            onMouseOut={(e) => mouseOut(e)}
             onMouseOver={(e) => mouseOverClick(e)}
             className="masker"
             id="Bb3"
@@ -77,8 +94,8 @@ function KeyboardSVG() {
         <g>
           <image
             onMouseDown={(e) => mouseClick(e)}
-            onMouseUp={(e) => mouseUp(e, "y")}
-            onMouseOut={(e) => mouseOut(e, "y")}
+            onMouseUp={(e) => mouseUp(e)}
+            onMouseOut={(e) => mouseOut(e)}
             onMouseOver={(e) => mouseOverClick(e)}
             className="masker"
             id="Ab3"
@@ -89,8 +106,8 @@ function KeyboardSVG() {
         <g>
           <image
             onMouseDown={(e) => mouseClick(e)}
-            onMouseUp={(e) => mouseUp(e, "y")}
-            onMouseOut={(e) => mouseOut(e, "y")}
+            onMouseUp={(e) => mouseUp(e)}
+            onMouseOut={(e) => mouseOut(e)}
             onMouseOver={(e) => mouseOverClick(e)}
             className="masker"
             id="Gb3"
@@ -101,8 +118,8 @@ function KeyboardSVG() {
         <g>
           <image
             onMouseDown={(e) => mouseClick(e)}
-            onMouseUp={(e) => mouseUp(e, "y")}
-            onMouseOut={(e) => mouseOut(e, "y")}
+            onMouseUp={(e) => mouseUp(e)}
+            onMouseOut={(e) => mouseOut(e)}
             onMouseOver={(e) => mouseOverClick(e)}
             className="masker"
             id="Eb3"
@@ -113,8 +130,8 @@ function KeyboardSVG() {
         <g>
           <image
             onMouseDown={(e) => mouseClick(e)}
-            onMouseUp={(e) => mouseUp(e, "y")}
-            onMouseOut={(e) => mouseOut(e, "y")}
+            onMouseUp={(e) => mouseUp(e)}
+            onMouseOut={(e) => mouseOut(e)}
             onMouseOver={(e) => mouseOverClick(e)}
             className="masker"
             id="E4"
@@ -125,8 +142,8 @@ function KeyboardSVG() {
         <g>
           <image
             onMouseDown={(e) => mouseClick(e)}
-            onMouseUp={(e) => mouseUp(e, "y")}
-            onMouseOut={(e) => mouseOut(e, "y")}
+            onMouseUp={(e) => mouseUp(e)}
+            onMouseOut={(e) => mouseOut(e)}
             onMouseOver={(e) => mouseOverClick(e)}
             className="masker"
             id="D4"
@@ -137,8 +154,8 @@ function KeyboardSVG() {
         <g>
           <image
             onMouseDown={(e) => mouseClick(e)}
-            onMouseUp={(e) => mouseUp(e, "y")}
-            onMouseOut={(e) => mouseOut(e, "y")}
+            onMouseUp={(e) => mouseUp(e)}
+            onMouseOut={(e) => mouseOut(e)}
             onMouseOver={(e) => mouseOverClick(e)}
             className="masker"
             id="C4"
@@ -149,8 +166,8 @@ function KeyboardSVG() {
         <g>
           <image
             onMouseDown={(e) => mouseClick(e)}
-            onMouseUp={(e) => mouseUp(e, "y")}
-            onMouseOut={(e) => mouseOut(e, "y")}
+            onMouseUp={(e) => mouseUp(e)}
+            onMouseOut={(e) => mouseOut(e)}
             onMouseOver={(e) => mouseOverClick(e)}
             className="masker"
             id="B3"
@@ -161,8 +178,8 @@ function KeyboardSVG() {
         <g>
           <image
             onMouseDown={(e) => mouseClick(e)}
-            onMouseUp={(e) => mouseUp(e, "y")}
-            onMouseOut={(e) => mouseOut(e, "y")}
+            onMouseUp={(e) => mouseUp(e)}
+            onMouseOut={(e) => mouseOut(e)}
             onMouseOver={(e) => mouseOverClick(e)}
             className="masker"
             id="A3"
@@ -173,8 +190,8 @@ function KeyboardSVG() {
         <g>
           <image
             onMouseDown={(e) => mouseClick(e)}
-            onMouseUp={(e) => mouseUp(e, "y")}
-            onMouseOut={(e) => mouseOut(e, "y")}
+            onMouseUp={(e) => mouseUp(e)}
+            onMouseOut={(e) => mouseOut(e)}
             onMouseOver={(e) => mouseOverClick(e)}
             className="masker"
             id="G3"
@@ -185,8 +202,8 @@ function KeyboardSVG() {
         <g>
           <image
             onMouseDown={(e) => mouseClick(e)}
-            onMouseUp={(e) => mouseUp(e, "y")}
-            onMouseOut={(e) => mouseOut(e, "y")}
+            onMouseUp={(e) => mouseUp(e)}
+            onMouseOut={(e) => mouseOut(e)}
             onMouseOver={(e) => mouseOverClick(e)}
             className="masker"
             id="F3"
@@ -199,8 +216,8 @@ function KeyboardSVG() {
             className="masker"
             id="E3"
             onMouseDown={(e) => mouseClick(e)}
-            onMouseUp={(e) => mouseUp(e, "y")}
-            onMouseOut={(e) => mouseOut(e, "y")}
+            onMouseUp={(e) => mouseUp(e)}
+            onMouseOut={(e) => mouseOut(e)}
             onMouseOver={(e) => mouseOverClick(e)}
             transform="translate(11 14)"
             xlinkHref="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAEcCAYAAACBGzd+AAAACXBIWXMAAAsSAAALEgHS3X78AAADDElEQVR4Xu3cP2sTcQDG8ef+JGlq09bGYrESrSiCgoMu2g4ujoq4dHNxdfUdCI71DQjiVlBQBDffgu/AF+Da0Ca5JPc7hyDYob3aJP0aeD7TcTxc8uXu1ouKotA0bG+/eLKxceNllvV+/X0+hNCv1+cf3bm9crk+V/uRD4eDo65xlCRNK5L0+s3bV2nZ+LTu3tv8tPngYbXdbh86PxgENZvL2tq6piSJ7kvhiCscZ/S3373fXZ9aQLez/3Nvb+/W/v7hgKyfa6kRlAwWpTySwimegGpFCoWiYhjHZduJK6Q4jqQoKlueyNkHTJgDaA6gOYDmAJoDaA6gOYDmAJoDaA6gOYDmAJoDaA6gOYDmAJoDaA6gOYDmAJoDaA6gOYDmAJoDaA6gOYDmAJoDaA6gOYDmAJoDaA6gOYDmAJoDaA6gOYDmAJoDaA6gOYDmAJoDaA6gOYDmAJoDaA6gOYDmAJoDaA6gOYDmAJoDaA6gOYDmAJoDaA6gOYDmAJoDaA6gOYDmAJoDaA6gOYDmAJoDaA6gOYDmAJoDaA6gOYDmAJoDaA6gOYDmAJoDaA6gOYA2tYCiKAZRVLYa39QCKpXq+TzPy2ZjSyVpZ+dD0WxeVJb1yvYntrFxU91up2w2tlSSlpebWlu7pE7noGx/Yv1+pjzPFU35OUolKcu66nQO1Ot1y/b/ZNp/XpriO3BWZj4g/XMQQlAIxXHbiZj0b8z+HWi1rlz/8vljaLWuxtlBu2w/tjwvtHCuKhWTuRNpJY1q6+uL8YXVJWk1KdtPRh6kQZAm0DB6B7KhpIHUGx6//g/N/DvgAJoDaA6gOYDmAJoDaA6gOYDmAJoDaA6gOYDmAJoDaA6gOYDmAJoDaA6gOYDmAJoDaA6gOYDmAJoDaA6gOYDmAJoDaA6gOYDmAJoDaA6gOYDmAJoDaA6gOYDmAJoDaA6gOYA28wGjT5MkyegwOaNvq4wrTqQoSJLSQnGIa/OS5qTK9L9KNhk1KcpVRGmIGo3GyrOnj583FuqNPM9n4uswSZKkkvT12/fd32ulitWTKwYSAAAAAElFTkSuQmCC"
@@ -208,7 +225,7 @@ function KeyboardSVG() {
         </g>
       </svg>
     </div>
-  )
+  );
 }
 
 export default KeyboardSVG;

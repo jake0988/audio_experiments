@@ -4,9 +4,8 @@ import { useEffect } from "react";
 import { useRef } from "react";
 
 function AM() {
-
-  return
-  <div></div>
+  return;
+  <div>null</div>;
 }
 
-export default AM
+export default AM;
