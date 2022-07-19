@@ -8,14 +8,13 @@ export function synthChange(e, synthType) {
     defaultSynth()
   }
   if (e.type){
-    
   Tone.context.resume();
-  
-  
+ 
+
   const fmSynth = new Tone.PolySynth(Tone.FMSynth).toDestination();
   const amSynth = new Tone.PolySynth(Tone.AMSynth).toDestination()
-  // const synth = new Tone.PolySynth(Tone.Synth).toDestination()
   const toneSynth = new Tone.PolySynth(Tone.Synth).toDestination()
+  debugger
   switch(synthType) {
     case("sine") :
       return synth = toneSynth;
@@ -28,33 +27,28 @@ export function synthChange(e, synthType) {
   }}
 }
 
-function synthOutput() {
-  if (synth) {
-    return Tone.Offline(() => {
-      const ampEnv = new Tone.AmplitudeEnvelope({
-        attack: 10,
-        decay: 0.2,
-        sustain: 5.0,
-        release: 5
-      }).toDestination();
-      // create an oscillator and connect it
-      synth.connect(ampEnv).start()
-    }, 1.5, 1);
-  
-}}
 
-synthOutput()
+
 export function polyNote(e, pitch) {
   if (!synth) {
     defaultSynth()
   }
   if (e.type) {
   Tone.start()
-
-Tone.context.resume();
   e.preventDefault();
   e.stopPropagation();
-  synth.triggerAttack(pitch);
+  const filter = new Tone.Filter(1200, "highpass").toDestination();
+
+  const env = new Tone.AmplitudeEnvelope({
+		attack: .5,
+		decay: 10,
+		sustain: 0.5,
+		release: 1,
+	}).toDestination()
+  const vol = new Tone.Volume(-60);
+  
+  const limiter = new Tone.Limiter(-20).toDestination();
+  synth.connect(vol).triggerAttack(pitch);
   }
 }
 
@@ -67,6 +61,7 @@ export function polyNoteUp(e, pitch) {
 }}
 
 function defaultSynth() {
-  synth = new Tone.PolySynth(Tone.Synth).toDestination()
+  const vol = new Tone.Volume(-60);
+  synth = new Tone.PolySynth(Tone.Synth).connect(vol).toDestination()
   Tone.context.resume();
 }
